@@ -19,7 +19,7 @@ const mockFetch = jest.fn(url => new Promise((resolve,reject) =>{
     }) } )
 }))
 
-describe('Test 2', ()=>{
+describe('Test 3', ()=>{
     let dom;
 
     beforeEach(async ()=>{
@@ -35,32 +35,31 @@ describe('Test 2', ()=>{
 
     })
    
-    it('Check that the name is set.', done =>{
+    it('Check that the image source is set.',  done=>{
 
         let button = dom.window.document.querySelector('button');
         let input = dom.window.document.querySelector('input');
-        let h3 = dom.window.document.querySelector('h3');
         let image = dom.window.document.querySelector('img');
         fireEvent.change(input, {target: {value: '1'}} );
         fireEvent.click(button);
         
         setTimeout(()=>{
-            expect(h3.textContent).toContain('George Bluth');
+            expect(mockFetch.mock.calls).toHaveLength(1);
+            expect(image.src).toBe('https://reqres.in/img/faces/1-image.jpg');
             done();
         },1000);  
     }, 2000);
 
-    it('Check that the name is set.', done =>{
+    it('Check that the image source is set.',  done=>{
 
         let button = dom.window.document.querySelector('button');
         let input = dom.window.document.querySelector('input');
-        let h3 = dom.window.document.querySelector('h3');
         let image = dom.window.document.querySelector('img');
         fireEvent.change(input, {target: {value: '2'}} );
         fireEvent.click(button);
         
-        setTimeout(()=>{
-            expect(h3.textContent).toContain('Janet Weaver');
+        setTimeout(()=>{        
+            expect(image.src).toBe('https://reqres.in/img/faces/2-image.jpg');
             done();
         },1000);  
     }, 2000);

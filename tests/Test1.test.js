@@ -19,7 +19,7 @@ const mockFetch = jest.fn(url => new Promise((resolve,reject) =>{
     }) } )
 }))
 
-describe('Test 1', ()=>{
+describe('Test 2', ()=>{
     let dom;
 
     beforeEach(async ()=>{
@@ -35,15 +35,33 @@ describe('Test 1', ()=>{
 
     })
    
-    it('Check that the fetch is called.',  done=>{
+    it('Check that the name is set.', done =>{
 
         let button = dom.window.document.querySelector('button');
         let input = dom.window.document.querySelector('input');
+        let h3 = dom.window.document.querySelector('h3');
+        let image = dom.window.document.querySelector('img');
         fireEvent.change(input, {target: {value: '1'}} );
         fireEvent.click(button);
         
         setTimeout(()=>{
             expect(mockFetch.mock.calls).toHaveLength(1);
+            expect(h3.textContent).toContain('George Bluth');
+            done();
+        },1000);  
+    }, 2000);
+
+    it('Check that the name is set.', done =>{
+
+        let button = dom.window.document.querySelector('button');
+        let input = dom.window.document.querySelector('input');
+        let h3 = dom.window.document.querySelector('h3');
+        let image = dom.window.document.querySelector('img');
+        fireEvent.change(input, {target: {value: '2'}} );
+        fireEvent.click(button);
+        
+        setTimeout(()=>{
+            expect(h3.textContent).toContain('Janet Weaver');
             done();
         },1000);  
     }, 2000);
